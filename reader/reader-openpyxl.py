@@ -1,4 +1,6 @@
 import openpyxl 
+from openpyxl.chart import Reference
+from openpyxl.chart import BarChart
 
 wb = openpyxl.load_workbook('assets/cars-2023.xlsx')
 
@@ -27,3 +29,29 @@ print(my_list)
 # for ele1,ele2,ele3,ele4,ele5,ele6 in my_list:
 #     (print ("{:<8}{:<35}{:<10}
 #              {:<10}{:<15}{:<15}".format(ele1,ele2,ele3,ele4,ele5,ele6)))
+
+values = Reference(ws,         # worksheet object   
+                   min_col=2,  # minimum column where your values begin
+                   max_col=2,  # maximum column where your values end
+                   min_row=1,  # minimum row you’d like to plot from
+                   max_row=13) # maximum row you’d like to plot from
+
+chart = BarChart()
+chart.add_data(values, titles_from_data=True)
+chart.set_categories(values)
+
+# set the title of the chart
+chart.title = "Total Sales"
+
+# set the title of the x-axis
+chart.x_axis.title = "Genre"
+
+# set the title of the y-axis
+chart.y_axis.title = "Total Sales by Genre"
+
+# the top-left corner of the chart
+# is anchored to cell F2 .
+ws.add_chart(chart,"J3")
+
+# save the file 
+wb.save("assets/cars-2023.xlsx")
