@@ -28,7 +28,8 @@ for index, row in df.iterrows():
     }
     objects_array.append(obj)
 
-# Print the array of objects
-for obj in objects_array:
-    print(obj)
+# Print the array of objects, ROWS
+# for obj in objects_array:
+#     print(obj)
 
+print("Number of rows that are in the first sheet: " + str(len(objects_array)))    
